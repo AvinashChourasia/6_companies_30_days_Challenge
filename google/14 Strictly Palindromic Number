@@ -1,0 +1,43 @@
+
+class Solution {
+    public boolean isStrictlyPalindromic(int n) {
+        
+        for(int i=2;i<=n-2;i++){
+            if(toBinary(n,i)==false){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public static boolean toBinary(int n,int b) {
+	    String ans = "";
+		while(n >= b){
+		    int temp = n%b;
+            n = n/b;
+		    ans += String.valueOf(temp);
+		}
+        ans += String.valueOf(n);
+        String x = ans;
+        
+        Stack<Character> s = new Stack<>();
+        int ni = ans.length();
+        for(int i=0;i<ni;i++){
+            s.push(ans.charAt(i));
+        }
+        String a = "";
+        while(!s.isEmpty()){
+            a+= s.pop();
+        }
+        
+        if(x==a){
+            return true;
+        }
+        return false;
+        
+	}
+    
+    
+}
+
+
