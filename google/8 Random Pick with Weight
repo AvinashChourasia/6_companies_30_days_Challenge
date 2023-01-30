@@ -1,0 +1,36 @@
+
+class Solution {
+
+    Random random;
+    int wSums[];
+    
+    public Solution(int[] w) {
+        this.random = new Random();
+        for(int i=1; i<w.length; ++i)
+            w[i] += w[i-1];
+        this.wSums = w;
+    }
+    
+    public int pickIndex() {
+        int n = wSums.length;
+        int idx = random.nextInt(wSums[n-1]) + 1;
+        int l = 0;
+        int r = n - 1;
+        while(l < r){
+            int mid = l + (r-l)/2;
+            if(wSums[mid] == idx){
+                return mid;
+            }
+            else if(wSums[mid] < idx){
+                l = mid + 1;
+            }
+            else{
+                r = mid;
+            }
+        }
+        return l;
+    }
+
+}
+
+
