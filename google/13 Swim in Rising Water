@@ -1,0 +1,43 @@
+
+public class Pair{
+    int f,s;
+    Pair(int f, int s){
+        this.f = f;
+        this.s = s;
+    }
+}
+
+class Solution {
+    
+    public int swimInWater(int[][] grid) {
+        
+        int n = grid.length;
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a,b)->(grid[a.f][a.s] - grid[b.f][b.s]));;
+        int visited[][] = new int[n][n];
+        pq.add(new Pair(0,0));
+        visited[0][0] = 1;
+        int delrow[] = {-1,0,+1,0};
+        int delcol[] = {0,+1,0,-1};
+        int dist = 0;
+        while(!pq.isEmpty()){
+            int r = pq.peek().f;
+            int c = pq.peek().s;
+            pq.poll();
+            dist = Math.max(dist,grid[r][c]);
+            if(r==n-1 && c==n-1){
+                return dist;
+            }
+            for(int i=0;i<4;i++){
+                int nrow = r + delrow[i];
+                int ncol = c + delcol[i];
+                if(nrow>=0 && nrow<n && ncol>=0 && ncol<n && visited[nrow][ncol]==0){
+                    pq.add(new Pair(nrow,ncol));
+                    visited[nrow][ncol] = 1;
+                }
+            }
+        }
+        return dist;
+    }
+
+}
+
