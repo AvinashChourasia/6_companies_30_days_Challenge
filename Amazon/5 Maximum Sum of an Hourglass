@@ -1,0 +1,31 @@
+
+class Solution {
+    
+    public int maxSum(int[][] grid) {
+        
+        int n = grid.length;
+        int m = grid[0].length;
+        int maxSum = 0;
+        for(int i=0;i<=n-3;i++){
+            for(int j=0;j<=m-3;j++){
+                maxSum = Math.max(maxSum,find(grid,i,i+2,j,j+2));
+            }
+        }
+        return maxSum;
+    }
+
+    public static int find(int grid[][],int rs,int re,int cs,int ce){
+        int sum = 0;
+        for(int i=rs;i<=re;i++){
+            for(int j=cs;j<=ce;j++){
+                if(i==rs+1 && (j==cs || j==ce)){
+                    continue;
+                }
+                sum += grid[i][j];
+            }
+        }
+        return sum;
+    }
+
+}
+
