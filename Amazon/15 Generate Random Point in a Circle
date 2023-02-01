@@ -1,0 +1,23 @@
+
+class Solution {
+
+    double r, x, y;
+    public Solution(double radius, double x_center, double y_center) {
+        r = radius;
+        x = x_center;
+        y = y_center;
+    }
+
+    public double[] randPoint() {
+        double ans[] = new double[2];
+        double angle = Math.random()*2*Math.PI,
+        hypotenuse = Math.sqrt(Math.random())*r,
+        adjacent = Math.cos(angle)*hypotenuse,
+        opposite = Math.sin(angle)*hypotenuse;
+        ans[0] = x+adjacent;
+        ans[1] = y+opposite;
+        return ans;
+    }
+
+}
+
